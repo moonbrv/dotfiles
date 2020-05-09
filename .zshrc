@@ -2,16 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/moonbrv/.oh-my-zsh"
+export ZSH="/Users/dmytro.palamarchuk/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME=""
-
-# theme removed becuse it will be loaded on shell start
-# see https://github.com/sindresorhus/pure
+ZSH_THEME="amuse"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -29,8 +26,14 @@ ZSH_THEME=""
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -66,13 +69,19 @@ ZSH_THEME=""
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  docker
-  osx
-  dotenv
-  httpie
-  tmux
-  fasd
+git
+colored-man-pages
+colorize
+command-not-found
+nvm
+lein
+fasd
+docker
+dotenv
+httpie
+osx
+tmux
+z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -80,11 +89,25 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-# export PATH="$HOME/.npm-global/lib/node_modules:$PATH"
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# for GPG signing before deploy to clojars
+export GPG_TTY=$(tty)
+
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+func ivc() {
+    VERSION_UPDATE=$(python /usr/local/bin/iv.py ./project.clj | tr -d  '\n')
+    git add project.clj
+    git commit -m $VERSION_UPDATE
+}
+
+# HASKELL STACK SETTINGS
+alias ghci="stack exec -- ghci"
+alias ghc="stack exec -- ghc"
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-export NPM_CONFIG_PREFIX=~/.npm-global
-export PATH=~/.npm-global/bin:$PATH
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -96,9 +119,6 @@ export PATH=~/.npm-global/bin:$PATH
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -107,11 +127,16 @@ export PATH=~/.npm-global/bin:$PATH
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_FALLBACK_LIBRARY_PATH
 
-alias dccu="docker rm $(docker ps -a -q)"
-alias dicu="docker rmi $(docker images -a -q)"
+# override amuse theme defaults
+ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}\u2387 "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[orange]%}!"
+PROMPT='
+%{$fg_bold[green]%}%~%{$reset_color%}$(git_prompt_info) %{$fg_bold[red]%}%*%{$reset_color%}
+$ '
 
-# launch shell command
-autoload -U promptinit; promptinit
-prompt pure
-tmux a -t 0
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/dmytro.palamarchuk/.sdkman"
+[[ -s "/Users/dmytro.palamarchuk/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/dmytro.palamarchuk/.sdkman/bin/sdkman-init.sh"
+export PATH="/usr/local/sbin:$PATH"
