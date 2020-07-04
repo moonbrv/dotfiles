@@ -73,6 +73,9 @@ git
 colored-man-pages
 colorize
 command-not-found
+brew
+history
+kubectl
 nvm
 lein
 fasd
@@ -105,6 +108,11 @@ func ivc() {
 # HASKELL STACK SETTINGS
 alias ghci="stack exec -- ghci"
 alias ghc="stack exec -- ghc"
+
+# DOCKER HELPERS
+alias dsrc="docker stop $(docker ps -aq)"
+alias drac="docker rm $(docker ps -aq)"
+alias drai="docker rmi $(docker images -q)"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
