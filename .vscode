@@ -1,0 +1,123 @@
+{
+  "window.zoomLevel": -1,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.minimap.enabled": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontFamily": "Menlo, 'Courier New', monospace",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "breadcrumbs.enabled": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/env/**": true,
+    "**/venv/**": true,
+    "env-*": true,
+    "**/.idea/**": true,
+    "**/.shadow-cljs/**": true,
+    "**/.clj-kondo/.cache/**": true,
+    "**/compiled/**": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/.vscode": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/node_modules/**": true,
+    "venv": true,
+    "*.sublime-*": true,
+    "env*": true,
+    "**/.idea/**": true,
+    "**/.shadow-cljs/**": true,
+    "**/.clj-kondo/.cache/**": true,
+    "**/compiled/**": true
+  },
+  "workbench.activityBar.visible": false,
+  "workbench.statusBar.visible": false,
+  "calva.highlight.enableBracketColors": false,
+  "calva.enableJSCompletions": false,
+  "calva.sendAsyncOutputTo": "Both",
+  "calva.showDocstringInParameterHelp": true,
+  "calva.highlight.cycleBracketColors": false,
+  "editor.lineNumbers": "off",
+  "editor.quickSuggestionsDelay": 33,
+  "sync.gist": "d31410d7c9a40fa596a036840d5ac129",
+  "editor.minimap.renderCharacters": false,
+  "terminal.integrated.cursorStyle": "line",
+  "editor.showFoldingControls": "always",
+  "editor.folding": false,
+  "editor.formatOnSave": true,
+  "editor.accessibilitySupport": "off",
+  "editor.colorDecorators": false,
+  "editor.dragAndDrop": false,
+  "editor.glyphMargin": false,
+  "editor.codeLens": false,
+  "merge-conflict.codeLens.enabled": false,
+  "update.showReleaseNotes": true,
+  "telemetry.enableCrashReporter": true,
+  "telemetry.enableTelemetry": true,
+  "npm.fetchOnlinePackageInfo": false,
+  "workbench.enableExperiments": false,
+  "editor.renderControlCharacters": false,
+  "extensions.ignoreRecommendations": true,
+  "calva.paredit.defaultKeyMap": "strict",
+  "calva.prettyPrintingOptions": {
+    "maxDepth": 3,
+    "maxLength": 8,
+    "enabled": true,
+    "printEngine": "pprint",
+    "width": 120
+  },
+  "editor.lineHeight": 18,
+  "editor.fontSize": 14,
+  "editor.tokenColorCustomizations": {
+    "[Monokai]": {
+      "textMateRules": [
+        {
+          "scope": ["variable.other.constant.clojure"],
+          "settings": {
+            "foreground": "#AE81FF",
+            "fontStyle": "bold"
+          }
+        }
+      ]
+
+    }
+  },
+
+  "files.trimFinalNewlines": true,
+  "workbench.iconTheme": null,
+  "workbench.editor.closeOnFileDelete": true,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.perEditorGroup": true,
+  "window.nativeTabs": true,
+  "extensions.webWorker": true,
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
+  ],
+  "editor.occurrencesHighlight": false,
+  "editor.overviewRulerBorder": false,
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.find.addExtraSpaceOnTop": false,
+  "workbench.editor.restoreViewState": false,
+  "workbench.editor.limit.value": 7,
+  "json.maxItemsComputed": 2500,
+  "editor.maxTokenizationLineLength": 12000,
+  "files.restoreUndoStack": false,
+  "workbench.startupEditor": "none",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.colorTheme": "GitHub Light",
+}
