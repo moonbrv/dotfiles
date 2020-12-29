@@ -1,90 +1,25 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
 export ZSH="/Users/dmytro.palamarchuk/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="amuse"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
-git
-colored-man-pages
-colorize
-command-not-found
-brew
-history
-kubectl
-nvm
-lein
-fasd
-docker
-dotenv
-httpie
-osx
-tmux
-z
+  git
+  colored-man-pages
+  colorize
+  command-not-found
+  brew
+  history
+  kubectl
+  nvm
+  lein
+  fasd
+  docker
+  dotenv
+  httpie
+  osx
+  tmux
+  z
+  extract
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,21 +33,43 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # for GPG signing before deploy to clojars
 export GPG_TTY=$(tty)
 
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 func ivc() {
     VERSION_UPDATE=$(python /usr/local/bin/iv.py ./project.clj | tr -d  '\n')
     git add project.clj
     git commit -m $VERSION_UPDATE
 }
 
-# HASKELL STACK SETTINGS
-alias ghci="stack exec -- ghci"
-alias ghc="stack exec -- ghc"
+function ssh-fab() {
+  PROFILES=`fab profiles:short`
+  if [ -n "${1}" ]; then
+    MATCHED=`echo "${PROFILES}"|grep ${1}`
+    NUM_MATCHED=`echo "${PROFILES}"|grep -c ${1}`
+    if [ $(( NUM_MATCHED )) = 1 ]; then
+      HOST=`echo "${MATCHED}" | head -n 1 | sed -e 's/: /:/g' | cut -f 2 -d : `
+      echo "${MATCHED}" | grep --color=always ${1}
+      ssh ${HOST} ${@:2}
+    elif [ $(( NUM_MATCHED )) = 0 ]; then
+      echo "Not found: ${1}"
+      echo "${PROFILES}"
+    else
+      echo "Found many:"
+      echo "${MATCHED}" | grep --color=always ${1}
+    fi
+  else
+    echo "Usage: ${0} PROFILE [SSH-OPTS]\nProfiles:"
+    echo "${PROFILES}"
+  fi
+}
 
 # DOCKER HELPERS
 alias dsrc="docker stop $(docker ps -aq)"
 alias drac="docker rm $(docker ps -aq)"
 alias drai="docker rmi $(docker images -q)"
+alias dk='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+alias gbrs='git branch --sort=-committerdate'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
