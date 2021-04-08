@@ -1,5 +1,4 @@
 {
-  "window.zoomLevel": -1,
   "editor.tabSize": 2,
   "editor.renderWhitespace": "all",
   "[javascript]": {
@@ -16,19 +15,22 @@
   "breadcrumbs.enabled": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
+    "**/.git/**": true,
+    "**/.lsp/**": true,
     "**/node_modules/**": true,
     "**/env/**": true,
     "**/venv/**": true,
     "env-*": true,
     "**/.idea/**": true,
     "**/.shadow-cljs/**": true,
-    "**/.clj-kondo/.cache/**": true,
+    "**/.clj-kondo/**": true,
+    "**/.calva/**": true,
+    "**/target/**": true,
     "**/compiled/**": true
   },
   "files.exclude": {
     "**/.git": true,
+    "**/.lsp/**": true,
     "**/.DS_Store": true,
     "**/.vscode": true,
     "**/__pycache__": true,
@@ -39,11 +41,12 @@
     "env*": true,
     "**/.idea/**": true,
     "**/.shadow-cljs/**": true,
-    "**/.clj-kondo/.cache/**": true,
-    "**/compiled/**": true
+    "**/.clj-kondo/**": true,
+    "**/.calva/**": true,
+    "**/compiled/**": true,
+    "**/target/**": true
   },
   "workbench.activityBar.visible": false,
-  "workbench.statusBar.visible": false,
   "calva.highlight.enableBracketColors": false,
   "calva.enableJSCompletions": false,
   "calva.sendAsyncOutputTo": "Both",
@@ -72,14 +75,12 @@
   "extensions.ignoreRecommendations": true,
   "calva.paredit.defaultKeyMap": "strict",
   "calva.prettyPrintingOptions": {
-    "maxDepth": 3,
-    "maxLength": 8,
-    "enabled": true,
+    "enabled": false,
     "printEngine": "pprint",
-    "width": 120
+    "width": 120,
+    "maxLength": 8,
+    "maxDepth": 3
   },
-  "editor.lineHeight": 18,
-  "editor.fontSize": 14,
   "editor.tokenColorCustomizations": {
     "[Monokai]": {
       "textMateRules": [
@@ -102,22 +103,44 @@
   "workbench.editor.limit.perEditorGroup": true,
   "window.nativeTabs": true,
   "extensions.webWorker": true,
-  "workbench.editorAssociations": [
-    {
-      "viewType": "jupyter.notebook.ipynb",
-      "filenamePattern": "*.ipynb"
-    }
-  ],
+  "workbench.editorAssociations": [],
   "editor.occurrencesHighlight": false,
   "editor.overviewRulerBorder": false,
   "editor.copyWithSyntaxHighlighting": false,
   "editor.find.addExtraSpaceOnTop": false,
   "workbench.editor.restoreViewState": false,
-  "workbench.editor.limit.value": 7,
+  "workbench.editor.limit.value": 6,
   "json.maxItemsComputed": 2500,
-  "editor.maxTokenizationLineLength": 12000,
   "files.restoreUndoStack": false,
   "workbench.startupEditor": "none",
   "diffEditor.ignoreTrimWhitespace": false,
   "workbench.colorTheme": "GitHub Light",
+  "search.exclude": {
+    "**/.git": true,
+    "**/.lsp/**": true,
+    "**/.DS_Store": true,
+    "**/.vscode": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/node_modules/**": true,
+    "venv": true,
+    "*.sublime-*": true,
+    "env*": true,
+    "**/.idea/**": true,
+    "**/.shadow-cljs/**": true,
+    "**/.clj-kondo/**": true,
+    "**/.calva/**": true,
+    "**/target/**": true,
+    "**/compiled/**": true
+  },
+  "search.searchOnTypeDebouncePeriod": 500,
+  "search.smartCase": true,
+  "editor.lineHeight": 18,
+  "terminal.integrated.fontSize": 14,
+  "editor.fontSize": 14,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.maxTokenizationLineLength": 10000,
+  "window.zoomLevel": -1,
 }
