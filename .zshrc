@@ -21,18 +21,59 @@ source $ZSH/oh-my-zsh.sh
 # for GPG signing before deploy to clojars
 export GPG_TTY=$(tty)
 
-# GIT HELPER
+# localisation settings
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+
+# git
 alias gbrs='git branch --sort=-committerdate'
-alias uuu='omz update && brew update && brew upgrade -q && clear && omz reload'
+alias gcaa='git commit --amend'
+# docker
+alias dps='docker ps'
+alias dcps='docker compose ps'
+
+alias ld='lazydocker'
+
+# python
+function pyinstall() {
+    python3 -m pip install -r $1
+}
+
+function lscr() {
+  cat package.json | jq .scripts
+}
+
+alias vv='nvim'
+alias nv='nvim'
+alias top='btop'
+
+# see https://github.com/ofirgall/tmux-window-name
+# tmux-window-name() {
+# 	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+# }
+
+# add-zsh-hook chpwd tmux-window-name
 
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/moonbrv/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+# for yazi file manager
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd"  ] && [ "$cwd" != "$PWD"  ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+
+# setup FZF
+source <(fzf --zsh)
+
+[ -f "/Users/moonbrv/.ghcup/env" ] && source "/Users/moonbrv/.ghcup/env" # ghcup-env
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh --disable-up-arrow)"
