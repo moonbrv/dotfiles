@@ -209,6 +209,16 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+-- [[ Util ]]
+_G.CloseAllFloatingWindows = function()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local config = vim.api.nvim_win_get_config(win)
+    if config.relative ~= '' then
+      vim.api.nvim_win_close(win, false)
+    end
+  end
+end
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -919,6 +929,11 @@ require('lazy').setup({
             },
           },
         },
+        accept = {
+          auto_brackets = {
+            enabled = false,
+          },
+        },
       },
 
       sources = {
@@ -954,10 +969,17 @@ require('lazy').setup({
     -- 'webhooked/kanso.nvim',
     -- 'andersevenrud/nordic.nvim',
     'gbprod/nord.nvim',
+    -- 'alexkotusenko/nightgem.nvim',
+    -- 'HoNamDuong/hybrid.nvim',
+    -- 'navarasu/onedark.nvim',
+    -- 'mcauley-penney/techbase.nvim',
     -- 'nickkadutskyi/jb.nvim',
+    -- 'rmehri01/onenord.nvim',
     -- 'aktersnurra/no-clown-fiesta.nvim',
     -- 'AlexvZyl/nordic.nvim',
     -- 'vague2k/vague.nvim',
+    -- 'rose-pine/neovim',
+    -- 'maxmx03/solarized.nvim',
     -- 'EdenEast/nightfox.nvim',
     -- 'rebelot/kanagawa.nvim',
     -- 'thesimonho/kanagawa-paper.nvim',
@@ -974,14 +996,21 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'nord'
+      -- vim.cmd.colorscheme 'nightgem'
+      -- vim.cmd.colorscheme 'rose-pine-moon'
+      -- vim.cmd.colorscheme 'hybrid'
+      -- vim.cmd.colorscheme 'onedark'
+      -- vim.cmd.colorscheme 'techbase'
       -- vim.cmd.colorscheme 'jb'
       -- vim.cmd.colorscheme 'kanso-mist'
+      -- vim.cmd.colorscheme 'onenord'
       -- vim.cmd.colorscheme 'nordic'
       -- vim.cmd.colorscheme 'no-clown-fiesta'
       -- vim.cmd.colorscheme 'vague'
+      -- vim.cmd.colorscheme 'solarized'
       -- vim.cmd.colorscheme 'nordfox'
       -- vim.cmd.colorscheme 'nightfox'
-      -- vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'tokyonight-moon'
       -- vim.cmd.colorscheme 'kanagawa-dragon'
       -- vim.cmd.colorscheme 'kanagawa-paper-ink'
 
@@ -1022,7 +1051,14 @@ require('lazy').setup({
         },
         -- You can override colors
         on_colors = function(colors)
-          colors.polar_night.origin = '#363b46'
+          -- colors.polar_night.origin = '#2f343f'
+          -- '#2a393f'
+          -- '#282c34'
+          -- '#2F3239'
+          -- '#2c2e33'
+          -- '#363b46'
+          -- '#31353f'
+          -- '#2b2f38'
         end,
 
         -- You can override specific highlights to use other groups or a hex color
@@ -1036,9 +1072,9 @@ require('lazy').setup({
     --     italics = false, -- enable italics
     --     compile = true, -- enable compiling the colorscheme
     --     undercurl = true, -- enable undercurls
-    --     commentStyle = { italic = true },
+    --     commentStyle = { italic = false },
     --     functionStyle = {},
-    --     keywordStyle = { italic = true },
+    --     keywordStyle = { italic = false },
     --     statementStyle = {},
     --     typeStyle = {},
     --     transparent = false, -- do not set background color
@@ -1073,7 +1109,7 @@ require('lazy').setup({
     --       builtin_variables = 'none',
     --     },
     --     colors = {
-    --       bg = '#1C1918',
+    --       bg = '#212121',
     --     },
     --   }
     -- end,
