@@ -721,8 +721,9 @@ require('lazy').setup({
           -- But for many setups, the LSP (`ts_ls`) will work just fine
           -- ts_ls = {},
           html = {},
-          -- ts_ls = {},
-          vtsls = {},
+          ts_ls = {},
+          -- vtsls = {},
+          -- tsgo = {},
           eslint = {},
           jinja_lsp = {},
           jsonls = {},
@@ -904,6 +905,7 @@ require('lazy').setup({
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'default',
         ['<C-a>'] = { 'select_and_accept' },
+        ['<C-k>'] = { 'show' },
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -960,59 +962,82 @@ require('lazy').setup({
     opts_extend = { 'sources.default' },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    -- 'shaunsingh/nord.nvim',
-    -- 'webhooked/kanso.nvim',
-    -- 'andersevenrud/nordic.nvim',
+  -- Themes
+  -- You can easily change to a different colorscheme.
+  -- Change the name of the colorscheme plugin below, and then
+  -- change the command in the config to whatever the name of that colorscheme is.
+  --
+  -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  { 'navarasu/onedark.nvim' },
+  { 'nickkadutskyi/jb.nvim' },
+  { 'rmehri01/onenord.nvim' },
+  { 'AlexvZyl/nordic.nvim' },
+  { 'rose-pine/neovim' },
+  { 'maxmx03/solarized.nvim' },
+  { 'EdenEast/nightfox.nvim' },
+  { 'rebelot/kanagawa.nvim' },
+  { 'thesimonho/kanagawa-paper.nvim' },
+  { 'folke/tokyonight.nvim' },
+  { 'nickkadutskyi/jb.nvim' },
+  {
+    'vague-theme/vague.nvim',
+    config = function()
+      require('vague').setup {
+        style = {
+          boolean = 'none',
+          error = 'none',
+          comments = 'none',
+          headings = 'none',
+          strings = 'none',
+          keyword_return = 'none',
+          builtin_constants = 'none',
+          builtin_variables = 'none',
+        },
+        -- colors = {
+        --   bg = '#212121',
+        -- },
+      }
+    end,
+  },
+  {
+    'webhooked/kanso.nvim',
+    config = function()
+      require('kanso').setup {
+        bold = false, -- enable bold fonts
+        italics = false, -- enable italics
+        compile = true, -- enable compiling the colorscheme
+        undercurl = true, -- enable undercurls
+        commentStyle = { italic = false },
+        functionStyle = {},
+        keywordStyle = { italic = false },
+        statementStyle = {},
+        typeStyle = {},
+        transparent = false, -- do not set background color
+        dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true, -- define vim.g.terminal_color_{0,17}
+        colors = { -- add/modify theme and palette colors
+          palette = {},
+          theme = { zen = {}, pearl = {}, ink = {}, all = {} },
+        },
+        overrides = function(colors) -- add/modify highlights
+          return {}
+        end,
+        theme = 'mist', -- Load "zen" theme
+        background = { -- map the value of 'background' option to a theme
+          dark = 'mist', -- try "ink" !
+          light = 'pearl', -- try "mist" !
+        },
+      }
+    end,
+  },
+  {
     'gbprod/nord.nvim',
-    -- 'alexkotusenko/nightgem.nvim',
-    -- 'HoNamDuong/hybrid.nvim',
-    -- 'navarasu/onedark.nvim',
-    -- 'mcauley-penney/techbase.nvim',
-    -- 'nickkadutskyi/jb.nvim',
-    -- 'rmehri01/onenord.nvim',
-    -- 'aktersnurra/no-clown-fiesta.nvim',
-    -- 'AlexvZyl/nordic.nvim',
-    -- 'vague2k/vague.nvim',
-    -- 'rose-pine/neovim',
-    -- 'maxmx03/solarized.nvim',
-    -- 'EdenEast/nightfox.nvim',
-    -- 'rebelot/kanagawa.nvim',
-    -- 'thesimonho/kanagawa-paper.nvim',
-    -- 'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
-      -- vim.g.nord_bold = false
-      -- vim.g.nord_contrast = true
-      -- vim.g.nord_italic = false
-      -- vim.g.nord_disable_background = true
-      -- vim.g.nord_borders = true
-
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'nord'
-      -- vim.cmd.colorscheme 'nightgem'
-      -- vim.cmd.colorscheme 'rose-pine-moon'
-      -- vim.cmd.colorscheme 'hybrid'
-      -- vim.cmd.colorscheme 'onedark'
-      -- vim.cmd.colorscheme 'techbase'
-      -- vim.cmd.colorscheme 'jb'
-      -- vim.cmd.colorscheme 'kanso-mist'
-      -- vim.cmd.colorscheme 'onenord'
-      -- vim.cmd.colorscheme 'nordic'
-      -- vim.cmd.colorscheme 'no-clown-fiesta'
-      -- vim.cmd.colorscheme 'vague'
-      -- vim.cmd.colorscheme 'solarized'
-      -- vim.cmd.colorscheme 'nordfox'
-      -- vim.cmd.colorscheme 'nightfox'
-      -- vim.cmd.colorscheme 'tokyonight-moon'
-      -- vim.cmd.colorscheme 'kanagawa-dragon'
-      -- vim.cmd.colorscheme 'kanagawa-paper-ink'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -1041,7 +1066,7 @@ require('lazy').setup({
           },
         },
         colorblind = {
-          enable = false,
+          enable = true,
           preserve_background = false,
           severity = {
             protan = 0,
@@ -1065,54 +1090,6 @@ require('lazy').setup({
         on_highlights = function(highlights, colors) end,
       }
     end,
-
-    -- config = function()
-    --   require('kanso').setup {
-    --     bold = false, -- enable bold fonts
-    --     italics = false, -- enable italics
-    --     compile = true, -- enable compiling the colorscheme
-    --     undercurl = true, -- enable undercurls
-    --     commentStyle = { italic = false },
-    --     functionStyle = {},
-    --     keywordStyle = { italic = false },
-    --     statementStyle = {},
-    --     typeStyle = {},
-    --     transparent = false, -- do not set background color
-    --     dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-    --     terminalColors = true, -- define vim.g.terminal_color_{0,17}
-    --     colors = { -- add/modify theme and palette colors
-    --       palette = {},
-    --       theme = { zen = {}, pearl = {}, ink = {}, all = {} },
-    --     },
-    --     overrides = function(colors) -- add/modify highlights
-    --       return {}
-    --     end,
-    --     theme = 'mist', -- Load "zen" theme
-    --     background = { -- map the value of 'background' option to a theme
-    --       dark = 'mist', -- try "ink" !
-    --       light = 'pearl', -- try "mist" !
-    --     },
-    --   }
-    -- end,
-
-    -- config = function()
-    --   require('vague').setup {
-    --     -- optional configuration here
-    --     style = {
-    --       boolean = 'none',
-    --       error = 'none',
-    --       comments = 'none',
-    --       headings = 'none',
-    --       strings = 'none',
-    --       keyword_return = 'none',
-    --       builtin_constants = 'none',
-    --       builtin_variables = 'none',
-    --     },
-    --     colors = {
-    --       bg = '#212121',
-    --     },
-    --   }
-    -- end,
   },
 
   -- Highlight todo, notes, etc in comments
@@ -1155,15 +1132,25 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    -- dependencies = {
+    --   'nvim-treesitter/nvim-treesitter-context',
+    -- },
+    lazy = false,
+    branch = 'main',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = {
+    config = function()
+      local ts = require 'nvim-treesitter'
+
+      -- Install core parsers at startup
+      ts.install {
         'bash',
         'c',
+        'make',
+        'comment',
+        'css',
         'diff',
         'html',
         'lua',
@@ -1176,26 +1163,48 @@ require('lazy').setup({
         'python',
         'go',
         'json',
+        'tsx',
         'typescript',
         'javascript',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+        'toml',
+        'xml',
+        'regex',
+      }
+
+      local group = vim.api.nvim_create_augroup('TreesitterSetup', { clear = true })
+
+      local ignore_filetypes = {
+        'checkhealth',
+        'lazy',
+        'mason',
+        'snacks_dashboard',
+        'snacks_notif',
+        'snacks_win',
+      }
+
+      -- Auto-install parsers and enable highlighting on FileType
+      vim.api.nvim_create_autocmd('FileType', {
+        group = group,
+        desc = 'Enable treesitter highlighting and indentation',
+        callback = function(event)
+          if vim.tbl_contains(ignore_filetypes, event.match) then
+            return
+          end
+
+          local lang = vim.treesitter.language.get_lang(event.match) or event.match
+          local buf = event.buf
+
+          -- Start highlighting immediately (works if parser exists)
+          pcall(vim.treesitter.start, buf, lang)
+
+          -- Enable treesitter indentation
+          vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+          -- Install missing parsers (async, no-op if already installed)
+          ts.install { lang }
+        end,
+      })
+    end,
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
