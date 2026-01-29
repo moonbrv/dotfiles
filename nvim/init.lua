@@ -721,8 +721,9 @@ require('lazy').setup({
           -- But for many setups, the LSP (`ts_ls`) will work just fine
           -- ts_ls = {},
           html = {},
-          -- ts_ls = {},
-          vtsls = {},
+          ts_ls = {},
+          -- vtsls = {},
+          -- tsgo = {},
           eslint = {},
           jinja_lsp = {},
           jsonls = {},
@@ -978,28 +979,6 @@ require('lazy').setup({
   { 'thesimonho/kanagawa-paper.nvim' },
   { 'folke/tokyonight.nvim' },
   { 'nickkadutskyi/jb.nvim' },
-  { 'catppuccin/nvim' },
-  { 'metalelf0/black-metal-theme-neovim' },
-  { 'dlvandenberg/stilla.nvim' },
-  { 'stevedylandev/darkmatter-nvim' },
-  { 'joselrodrigues/cursor-dark-midnight.nvim' },
-  { 'mcauley-penney/techbase.nvim' },
-  { 'nkxxll/ghostty-default-style-dark.nvim' },
-  { 'dybdeskarphet/gruvbox-minimal.nvim' },
-  -- {
-  --   'ydkulks/cursor-dark.nvim',
-  --   lazy = false,
-  --   config = function()
-  --     require('cursor-dark').setup {
-  --       -- For theme
-  --       style = 'dark-midnight',
-  --       -- For a transparent background
-  --       transparent = false,
-  --       -- If you have dashboard-nvim plugin installed
-  --       dashboard = false,
-  --     }
-  --   end,
-  -- },
   {
     'vague-theme/vague.nvim',
     config = function()
@@ -1087,7 +1066,7 @@ require('lazy').setup({
           },
         },
         colorblind = {
-          enable = false,
+          enable = true,
           preserve_background = false,
           severity = {
             protan = 0,
